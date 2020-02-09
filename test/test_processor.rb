@@ -53,9 +53,16 @@ describe Processor do
       end
     end
 
-    describe 'wrong date format' do
+    describe 'sign up date wrong format' do
       it 'returns failure' do
         result = processor.process('./test/fixtures/invalid_sign_up_date_format.csv')
+        refute result[:success]
+      end
+    end
+
+    describe 'email wrong format' do
+      it 'returns failure' do
+        result = processor.process('./test/fixtures/invalid_email_wrong_format.csv')
         refute result[:success]
       end
     end

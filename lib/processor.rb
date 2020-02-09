@@ -59,7 +59,11 @@ class Processor
     end
     return false unless all_headers_present
 
-    valid_date?(row['Sign Up Date'])
+    valid_date?(row['Sign Up Date']) && valid_email?(row['Email'])
+  end
+
+  def valid_email?(email)
+    !(URI::MailTo::EMAIL_REGEXP =~ email).nil?
   end
 
   def valid_headers?(headers)
