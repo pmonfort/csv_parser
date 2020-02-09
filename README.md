@@ -33,7 +33,19 @@ bundle exec rake process[CSV_PATH_STRING]
 
 #### Valid CSV
 ```
-rake process['test/fixtures/valid.csv']
+bundle exec rake process['test/fixtures/valid.csv']
+```
+#### File example
+```
+Name,Email,Sign Up Date,Role
+Eric,eric@testmail.com,2020-02-07,manager
+Carol,carol@testmail.com,2019-02-07,admin
+Jim,jim@testmail.com,2019-10-07,admin
+Jacob,jacab@testmail.com,2020-02-08,admin
+Megan,megan@testmail.com,2019-02-07,manager
+Peter,peter@testmail.com,2020-02-07,sales
+Collin,collin@testmail.com,2018-02-02,manager
+Sofia,sofia@testmail.com,2019-02-07,manager
 ```
 #### Output
 ```
@@ -45,7 +57,7 @@ Min Sign Up Date user
 
 #### Invalid CSV
 ```
-rake process['test/fixtures/invalid.csv']
+bundle exec rake process['test/fixtures/invalid.csv']
 ```
 #### Output
 ```
