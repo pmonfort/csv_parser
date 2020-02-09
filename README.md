@@ -13,7 +13,7 @@ Name, Email, Sign Up Date and Role
   min_date_record: Hash
 }
 ```
-max_date_record and max_date_record conteins a Hash representing a complete row from the CSV selected based on the `Sign Up date`
+max_date_record and max_date_record hashes represent a row from the CSV file, selected based on the `Sign Up date`
 
 ## Tests
 
