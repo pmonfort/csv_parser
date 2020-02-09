@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 class Processor
-  HEADERS = ['Email', "Name", 'Role', 'Sign Up Date'].freeze
+  HEADERS = %w[Email Name Role Sign\ Up\ Date].freeze
 
   def process(csv_file_path)
     result = { success: false, min_date_record: nil, max_date_record: nil }
@@ -16,25 +18,21 @@ class Processor
 
       row_date = parse_date(row['Sign Up Date'])
       current_min_date = parse_date(result[:min_date_record]['Sign Up Date'])
-      if current_min_date > row_date
-        result[:min_date_record] = row.to_h
-      end
+      result[:min_date_record] = row.to_h if current_min_date > row_date
 
       current_max_date = parse_date(result[:max_date_record]['Sign Up Date'])
-      if current_max_date < row_date
-        result[:max_date_record] = row.to_h
-      end
+      result[:max_date_record] = row.to_h if current_max_date < row_date
     end
 
     result[:success] = true
     result
   end
 
+  private
+
   def valid?(row, counter)
     # Validate file headers only on the first row
-    if counter == 1 && !valid_file_headers?(row)
-      return false
-    end
+    return false if counter == 1 && !valid_file_headers?(row)
 
     valid_row?(row)
   end
@@ -50,7 +48,7 @@ class Processor
   end
 
   def valid_file_headers?(row)
-    row.headers.sort == ["Name", "Email", "Sign Up Date", "Role"].sort
+    row.headers.sort == HEADERS
   end
 
   def valid_row?(row)
