@@ -5,7 +5,6 @@ require 'processor'
 describe Processor do
   let(:processor) { Processor.new }
   let(:valid_file) { './test/fixtures/valid.csv' }
-  let(:invalid_file) { './test/fixtures/invalid.csv' }
 
   describe 'processes valid files' do
     it 'returns success aaa' do
@@ -40,9 +39,25 @@ describe Processor do
   end
 
   describe 'processes invalid files' do
-    it 'returns failure' do
-      result = processor.process(valid_file)
-      refute result[:success]
+    describe 'missing column email' do
+      it 'returns failure' do
+        result = processor.process('./test/fixtures/invalid.csv')
+        refute result[:success]
+      end
+    end
+
+    describe 'missing field on one row' do
+      it 'returns failure' do
+        result = processor.process('./test/fixtures/invalid_row_missing_field.csv')
+        refute result[:success]
+      end
+    end
+
+    describe 'wrong date format' do
+      it 'returns failure' do
+        result = processor.process('./test/fixtures/invalid_sign_up_date_format.csv')
+        refute result[:success]
+      end
     end
   end
 end
