@@ -4,11 +4,11 @@ require 'processor'
 
 describe Processor do
   let(:processor) { Processor.new }
-  let(:valid_file) { './fixtures/valid.csv' }
-  let(:invalid_file) { './fixtures/invalid.csv' }
+  let(:valid_file) { './test/fixtures/valid.csv' }
+  let(:invalid_file) { './test/fixtures/invalid.csv' }
 
   describe 'processes valid files' do
-    it 'returns success' do
+    it 'returns success aaa' do
       result = processor.process(valid_file)
 
       assert result[:success]
@@ -18,24 +18,24 @@ describe Processor do
       result = processor.process(valid_file)
 
       expected_result = {
-        name: 'Jacob',
-        email: 'jacab@testmail.com',
-        sign_up_date: '2020-01-08',
-        role: 'admin'
+        'Name' => 'Jacob',
+        'Email' => 'jacab@testmail.com',
+        'Sign Up Date' => '2020-02-08',
+        'Role' => 'admin'
       }
-      assert_equal result[:max_date_record], expected_result
+      assert_equal expected_result, result[:max_date_record]
     end
 
     it 'returns the right min sign up date' do
       result = processor.process(valid_file)
 
       expected_result = {
-        name: 'Collin',
-        email: 'collin@testmail.com',
-        sign_up_date: '2018-02-02',
-        role: 'manager'
+        'Name' => 'Collin',
+        'Email' => 'collin@testmail.com',
+        'Sign Up Date' => '2018-02-02',
+        'Role' => 'manager'
       }
-      assert_equal result[:min_date_record], expected_result
+      assert_equal expected_result, result[:min_date_record]
     end
   end
 
