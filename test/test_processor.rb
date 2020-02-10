@@ -9,7 +9,7 @@ describe Processor do
   let(:valid_file) { './test/fixtures/valid.csv' }
 
   describe 'processes valid files' do
-    it 'returns success aaa' do
+    it 'returns success' do
       result = processor.process(valid_file)
 
       assert result[:success]
